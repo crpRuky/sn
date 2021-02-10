@@ -4,7 +4,7 @@
             <v-col cols="10">
                 <h1 class="green--text text--darken-2">
                     <v-icon large color="green darken-2">mdi-account-outline</v-icon>
-                    Иван Иванов
+                    {{name}}
                 </h1>
             </v-col>
         </v-row>
@@ -14,16 +14,16 @@
             </v-col>
             <v-col cols="10" class="text-left" max-width="400">
                 <p>
-                    Веб-сайт: <a href="https://example.com" target="_blank">example.com</a>
+                    Веб-сайт: <a href="https://example.com" target="_blank">{{website}}</a>
                 </p>
                 <p>
-                    E-mail: <a href="mailto:...">example@email.com</a>
+                    E-mail: <a href="mailto:...">{{email}}</a>
                 </p>
                 <p>
-                    Город: Москва
+                    Город: {{city}}
                 </p>
                 <p>
-                    Место работы: Нет
+                    Место работы: {{company}}
                 </p>
             </v-col>
         </v-row>
@@ -52,6 +52,32 @@ export default {
   name: 'Profile',
   components: {
     ProfileCard
+  },
+  data() {
+      return {
+          id: this.$route.params.id,
+          name:'',
+          website:'',
+          email:'',
+          city:'',
+          company:''
+      }
+  },
+  methods: {
+    getUser(){
+      this.axios.get(`http://jsonplaceholder.typicode.com/users/${this.id}`)
+      .then((response) => {
+        this.name = response.data.name;
+        this.website = response.data.website;
+        this.email = response.data.email;
+        this.city = response.data.address.city;
+        this.company = response.data.address.company.name;
+        console.log(response.data);
+      })
+    }
+  },
+  mounted() {
+      this.getUser();
   }
 }
 </script>

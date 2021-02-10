@@ -34,7 +34,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/users/asd">
+        <v-list-item link to="/users/1">
           <v-list-item-icon>
             <v-icon>mdi-account-arrow-left-outline</v-icon>
           </v-list-item-icon>
@@ -44,7 +44,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/users">
+        <v-list-item link to="/users" exact>
           <v-list-item-icon>
             <v-icon>mdi-account-plus-outline</v-icon>
           </v-list-item-icon>
