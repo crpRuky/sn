@@ -1,60 +1,83 @@
 <template>
-  <v-app>
-    <v-app-bar
+  <v-app id="app">
+    <v-navigation-drawer
       app
-      color="primary"
+      color="green"
       dark
+      expand-on-hover
+      hide-overlay
+      permanent
+      right
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <v-list nav shaped dense>
 
-      <v-spacer></v-spacer>
+        <v-list-item two-line>
+          <v-list-item-avatar style="margin-left: -8px; margin-right: 23px">
+            <img src="https://randomuser.me/api/portraits/men/7.jpg">
+          </v-list-item-avatar>
+          <v-list-item-content class="text-left">
+            <v-list-item-title class="font-weight-black">Иван Иванов</v-list-item-title>
+            <v-list-item-subtitle>Я не знаю кто это</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+        <v-divider class="my-3"></v-divider>
 
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+        <v-list-item link to="/">
+          <v-list-item-icon>
+            <v-icon>mdi-home-outline</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="text-left">Главная</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="/users/asd">
+          <v-list-item-icon>
+            <v-icon>mdi-account-arrow-left-outline</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="text-left">Профиль</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="/users">
+          <v-list-item-icon>
+            <v-icon>mdi-account-plus-outline</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="text-left">Найти друзей</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+      </v-list>
+
+    </v-navigation-drawer>
+
+    <v-content class="px-12 py-3">
+      <v-container fluid>
+        <router-view/>
+      </v-container>
+    </v-content>
+
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
   },
 
-  data: () => ({
-    //
-  }),
+  data: () => {
+    return {
+      navigation: true
+    }
+  }
 };
 </script>
