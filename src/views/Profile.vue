@@ -4,13 +4,13 @@
             <v-col cols="10">
                 <h1 class="green--text text--darken-2">
                     <v-icon large color="green darken-2">mdi-account-outline</v-icon>
-                    {{name}}
+                    {{username}}
                 </h1>
             </v-col>
         </v-row>
         <v-row class="text-left">
             <v-col cols="2">
-                <img src="https://randomuser.me/api/portraits/men/7.jpg" style="max-width: 100%">
+                <img :src="'https://randomuser.me/api/portraits/men/' + (id - 1) + '.jpg'" style="max-width: 100%">
             </v-col>
             <v-col cols="10" class="text-left" max-width="400">
                 <p>
@@ -28,19 +28,15 @@
             </v-col>
         </v-row>
 
-        <v-divider style="margin:30px 0px 30px 0px"></v-divider>
+        <v-divider style="margin:30px 0px 50px 0px"></v-divider>
 
-        <profile-card :author="'Иван'" :likes="256" :shares="64">
-          <template v-slot:title>Title</template>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores incidunt placeat explicabo atque numquam. Illo expedita a, aliquid laboriosam ipsam aut, esse dignissimos deserunt unde alias ad nobis?
+        <profile-card v-for="(post, i) in posts" v-bind:key="i" :author="username" :likes="256" :shares="64" :id="id - 1">
+          <template v-slot:title>{{post.title}}</template>
+          {{post.body}}
         </profile-card>
 
         <hr style="background-color:transparent; border:none; height:50px">
 
-        <profile-card :author="'Иван'" :likes="320" :shares="54">
-          <template v-slot:title>Title</template>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum dignissimos aperiam voluptate provident dolore iusto esse rerum rem soluta! Recusandae doloribus, magnam sit maxime eveniet laudantium accusantium ducimus esse impedit.
-        </profile-card>
 
     </v-container>
 </template>
@@ -56,28 +52,41 @@ export default {
   data() {
       return {
           id: this.$route.params.id,
-          name:'',
+          username:'',
           website:'',
           email:'',
           city:'',
-          company:''
+          company:'',
+          posts:[]
       }
   },
   methods: {
     getUser(){
       this.axios.get(`http://jsonplaceholder.typicode.com/users/${this.id}`)
       .then((response) => {
-        this.name = response.data.name;
+        this.username = response.data.name;
         this.website = response.data.website;
         this.email = response.data.email;
         this.city = response.data.address.city;
-        this.company = response.data.address.company.name;
-        console.log(response.data);
+        this.company = response.data.company.name;
       })
+    },
+    getUserPosts(){
+        this.axios.get(`http://jsonplaceholder.typicode.com/posts?userId=${this.id}`)
+        .then((response) => {
+            this.posts = response.data;
+        })
     }
+  },
+  watch: {
+      route() {
+        this.getUser();
+        this.getUserPosts();
+      }
   },
   mounted() {
       this.getUser();
+      this.getUserPosts();
   }
 }
 </script>

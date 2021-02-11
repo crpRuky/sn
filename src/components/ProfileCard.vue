@@ -2,6 +2,7 @@
         <v-card
           class="mx-auto"
           max-width="1000"
+          style="margin-bottom:50px"
         >
           <v-card-title>
             <span class="headline font-weight-bold"><slot name="title"></slot></span>
@@ -17,7 +18,7 @@
                 <v-img
                   class="elevation-6"
                   alt=""
-                  src="https://randomuser.me/api/portraits/men/7.jpg"
+                  :src="'https://randomuser.me/api/portraits/men/' + id + '.jpg'"
                 ></v-img>
               </v-list-item-avatar>
 
@@ -33,7 +34,7 @@
                   mdi-heart
                 </v-icon>
                 <span class="subheading mr-2">{{likes}}</span>
-                <span class="mr-1">·</span>
+                <span class="mr-4"></span>
                 <v-icon class="mr-1">
                   mdi-share-variant
                 </v-icon>
@@ -50,7 +51,8 @@
     props: {
         author:String,
         likes:Number,
-        shares:Number
+        shares:Number,
+        id:Number
     }
   }
 </script>
