@@ -14,6 +14,7 @@
             <v-text-field
                 label="Введите пароль"
                 v-model="password"
+                type="password"
                 outlined
             ></v-text-field>
 
@@ -37,14 +38,13 @@ export default {
   },
   methods: {
     auth(){
-      this.axios.get(`http://37.77.104.246/api/jsonstorage/?id=7cdf513fc9498220da55d99a46897284`)
+      this.axios.get(`https://api.npoint.io/77ea9f8e27a6895be323`)
       .then((response) => {
-        let users = response.data;
         let done = false;
-        for (let user of users) {
+        for (let user of response.data) {
             if (this.login == user.login && this.password == user.password) {
                 this.$emit('login', user)
-                this.$router.push('/users/1')
+                this.$router.push('/users/' + user.login)
                 done = true;
                 break;
             }

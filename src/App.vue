@@ -46,7 +46,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item exact link :to="'/users/1'" v-else>
+        <v-list-item exact link :to="'/users/' + current_user.login" v-else>
           <v-list-item-icon>
             <v-icon>mdi-account-arrow-left-outline</v-icon>
           </v-list-item-icon>
@@ -98,7 +98,6 @@ export default {
   methods: {
     updateUser(user) {
       this.current_user = user; 
-      console.log(this.current_user);
     }
   }
 };

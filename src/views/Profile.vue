@@ -4,33 +4,33 @@
             <v-col cols="10">
                 <h1 class="green--text text--darken-2">
                     <v-icon large color="green darken-2">mdi-account-outline</v-icon>
-                    {{username}}
+                    {{page_user.name}}
                 </h1>
             </v-col>
         </v-row>
         <v-row class="text-left">
             <v-col cols="2">
-                <img :src="'https://randomuser.me/api/portraits/men/' + (id - 1) + '.jpg'" style="max-width: 100%">
+                <img :src="page_user.photo" style="max-width: 100%">
             </v-col>
             <v-col cols="10" class="text-left" max-width="400">
                 <p>
-                    Веб-сайт: <a href="https://example.com" target="_blank">{{website}}</a>
+                    Веб-сайт: <a href="https://example.com" target="_blank">{{page_user.website}}</a>
                 </p>
                 <p>
-                    E-mail: <a href="mailto:...">{{email}}</a>
+                    E-mail: <a href="mailto:...">{{page_user.email}}</a>
                 </p>
                 <p>
-                    Город: {{city}}
+                    Город: {{page_user.city}}
                 </p>
                 <p>
-                    Место работы: {{company}}
+                    Место работы: {{page_user.company}}
                 </p>
             </v-col>
         </v-row>
 
         <v-divider style="margin:30px 0px 50px 0px"></v-divider>
 
-        <profile-card v-for="(post, i) in posts" v-bind:key="i" :author="username" :likes="256" :shares="64" :id="id - 1">
+        <profile-card v-for="(post, i) in posts" v-bind:key="i" :image="page_user.photo" :author="page_user.name" :likes="post.likes">
           <template v-slot:title>{{post.title}}</template>
           {{post.body}}
         </profile-card>
@@ -52,29 +52,31 @@ export default {
   data() {
       return {
           id: this.$route.params.id,
-          username:'',
-          website:'',
-          email:'',
-          city:'',
-          company:'',
+          page_user:JSON,
           posts:[]
       }
   },
   methods: {
     getUser(){
-      this.axios.get(`http://jsonplaceholder.typicode.com/users/${this.id}`)
+      this.axios.get(`https://api.npoint.io/77ea9f8e27a6895be323`)
       .then((response) => {
-        this.username = response.data.name;
-        this.website = response.data.website;
-        this.email = response.data.email;
-        this.city = response.data.address.city;
-        this.company = response.data.company.name;
+        for (let user of response.data) {
+            if (user.login == this.id) {
+                this.page_user = user;
+                break;
+            }
+        }
       })
     },
     getUserPosts(){
-        this.axios.get(`http://jsonplaceholder.typicode.com/posts?userId=${this.id}`)
+        this.axios.get(`https://api.npoint.io/b986d215bf022cf1ead0`)
         .then((response) => {
-            this.posts = response.data;
+            for (let user of response.data) {
+                if (user.login == this.id) {
+                    this.posts = user.posts;
+                    break;
+                }
+            }
         })
     }
   },
