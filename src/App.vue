@@ -34,7 +34,19 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/users/1">
+
+
+        <v-list-item link to="/login" v-if="!current_user">
+          <v-list-item-icon>
+            <v-icon>mdi-account-arrow-left-outline</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="text-left">Вход</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item exact link :to="'/users/1'" v-else>
           <v-list-item-icon>
             <v-icon>mdi-account-arrow-left-outline</v-icon>
           </v-list-item-icon>
@@ -43,6 +55,8 @@
             <v-list-item-title class="text-left">Профиль</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+
 
         <v-list-item link to="/users" exact>
           <v-list-item-icon>
@@ -60,7 +74,7 @@
 
     <v-content class="px-12 py-3">
       <v-container fluid>
-        <router-view/>
+        <router-view v-on:login="updateUser($event)" />
       </v-container>
     </v-content>
 
@@ -76,7 +90,15 @@ export default {
 
   data: () => {
     return {
-      navigation: true
+      navigation: true,
+      current_user:null
+    }
+  },
+
+  methods: {
+    updateUser(user) {
+      this.current_user = user; 
+      console.log(this.current_user);
     }
   }
 };
