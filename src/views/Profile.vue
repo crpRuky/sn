@@ -69,7 +69,6 @@ export default {
         this.email = response.data.email;
         this.city = response.data.address.city;
         this.company = response.data.company.name;
-        console.log(this.id)
       })
     },
     getUserPosts(){

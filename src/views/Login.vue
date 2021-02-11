@@ -44,7 +44,7 @@ export default {
         for (let user of users) {
             if (this.login == user.login && this.password == user.password) {
                 this.$emit('login', user)
-                this.$router.push('/users/4')
+                this.$router.push('/users/1')
                 done = true;
                 break;
             }
