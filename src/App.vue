@@ -15,11 +15,11 @@
         <!-- main -->
         <v-list-item two-line>
           <v-list-item-avatar style="margin-left: -8px; margin-right: 23px">
-            <img src="https://randomuser.me/api/portraits/men/7.jpg">
+            <img :src="current_user.photo">
           </v-list-item-avatar>
           <v-list-item-content class="text-left">
-            <v-list-item-title class="font-weight-black">Иван Иванов</v-list-item-title>
-            <v-list-item-subtitle>Я не знаю кто это</v-list-item-subtitle>
+            <v-list-item-title class="font-weight-black">{{current_user.name}}</v-list-item-title>
+            <v-list-item-subtitle>{{current_user.city}}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -37,7 +37,7 @@
 
 
         <!-- log -->
-        <v-list-item link to="/login" v-if="!current_user">
+        <v-list-item link to="/login" v-if="current_user.not_logged">
           <v-list-item-icon>
             <v-icon>mdi-account-arrow-left-outline</v-icon>
           </v-list-item-icon>
@@ -58,7 +58,7 @@
         </v-list-item>
         
         <!-- reg -->
-        <v-list-item link to="/registration" v-if="!current_user">
+        <v-list-item link to="/registration" v-if="current_user.not_logged">
           <v-list-item-icon>
             <v-icon>mdi-account-plus-outline</v-icon>
           </v-list-item-icon>
@@ -102,7 +102,12 @@ export default {
   data: () => {
     return {
       navigation: true,
-      current_user:null
+      current_user: {
+        name:"Войдите в аккаунт",
+        city:"",
+        photo:"https://cdn4.iconfinder.com/data/icons/linecon/512/photo-512.png",
+        not_logged:true
+      }
     }
   },
 
