@@ -9,7 +9,7 @@
         <v-row class="text-left">
             <v-col cols="4">
                 <v-avatar size="160" class="ma-1">
-                    <img :src="'https://randomuser.me/api/portraits/men/' + id + '.jpg'" style="max-width: 100%">
+                    <img :src="image" style="max-width: 100%">
                 </v-avatar>
             </v-col>
             <v-divider vertical class="ma-5"></v-divider>
@@ -21,7 +21,7 @@
                     {{city}}
                 </v-card-text>
                 <v-card-actions>
-                <v-btn outlined text color="success" link :to="'/users/' + (id + 1)">
+                <v-btn outlined text color="success" link :to="'/users/' + id">
                     ПЕРЕЙТИ В ПРОФИЛЬ
                 </v-btn>
                 </v-card-actions>
@@ -36,7 +36,8 @@
     props: {
         username:String,
         city:String,
-        id:Number
+        id:Number,
+        image:String
     }
   }
 </script>
