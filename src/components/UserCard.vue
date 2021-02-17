@@ -36,7 +36,7 @@
     props: {
         username:String,
         city:String,
-        id:Number,
+        id:String,
         image:String
     }
   }

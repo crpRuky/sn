@@ -12,6 +12,7 @@
 
       <v-list nav shaped dense>
 
+        <!-- main -->
         <v-list-item two-line>
           <v-list-item-avatar style="margin-left: -8px; margin-right: 23px">
             <img src="https://randomuser.me/api/portraits/men/7.jpg">
@@ -35,7 +36,7 @@
         </v-list-item>
 
 
-
+        <!-- log -->
         <v-list-item link to="/login" v-if="!current_user">
           <v-list-item-icon>
             <v-icon>mdi-account-arrow-left-outline</v-icon>
@@ -55,12 +56,22 @@
             <v-list-item-title class="text-left">Профиль</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
-
-
-        <v-list-item link to="/users" exact>
+        
+        <!-- reg -->
+        <v-list-item link to="/registration" v-if="!current_user">
           <v-list-item-icon>
             <v-icon>mdi-account-plus-outline</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="text-left">Регистрация</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- find -->
+        <v-list-item link to="/users" exact>
+          <v-list-item-icon>
+            <v-icon>mdi-account-search-outline</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>

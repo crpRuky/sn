@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     auth(){
-      this.axios.get(`https://api.npoint.io/77ea9f8e27a6895be323`)
+      this.axios.get(`http://37.77.104.246/api/jsonstorage/?id=e42c3957000fa1d66e09c8b7f48c08fa`)
       .then((response) => {
         let done = false;
         for (let user of response.data) {
